@@ -47,6 +47,9 @@ function addSelectedItemToCart() {
 
   // Using those, add one item to the Cart
   cart.addItem(product.name, parseInt(quantity.value));
+
+  selectElement.value = null;
+  quantity.value = null;
 }
 
 // Update the cart count in the header nav with the number of items in the Cart
