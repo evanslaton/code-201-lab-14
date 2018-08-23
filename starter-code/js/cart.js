@@ -5,6 +5,7 @@
 var table = document.getElementById('cart');
 table.addEventListener('click', removeItemFromCart);
 var cart;
+var tableEl = document.getElementById('cart');
 
 function loadCart() {
   var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
@@ -19,27 +20,45 @@ function renderCart() {
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() {
+  tableEl.innerHTML =
+    '<thead><tr><th>Remove</th><th>Quantity</th><th>Item</th></tr></thead>';
+}
 
-// TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
+  var items = JSON.parse(localStorage.getItem('cart'));
+  for (var i = 0; i < items.length; i++) {
+    var trEl = document.createElement('tr');
+    var tdRemoveEl = document.createElement('td');
+    var tdItemEl = document.createElement('td');
+    var tdQuantityEl = document.createElement('td');
 
-  // TODO: Find the table body
+    tdRemoveEl.textContent = 'x';
+    tdItemEl.textContent = items[i][0];
+    tdRemoveEl.setAttribute('id', i);
+    tdQuantityEl.textContent = items[i][1];
 
-  // TODO: Iterate over the items in the cart
-  // TODO: Create a TR
-  // TODO: Create a TD for the delete link, quantity,  and the item
-  // TODO: Add the TR to the TBODY and each of the TD's to the TR
-
+    tableEl.appendChild(trEl);
+    trEl.appendChild(tdRemoveEl);
+    trEl.appendChild(tdQuantityEl);
+    trEl.appendChild(tdItemEl);
+  }
 }
 
 function removeItemFromCart(event) {
-
-  // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
-  // TODO: Save the cart back to local storage
-  // TODO: Re-draw the cart table
-
+  var toDelete = event.target;
+  var deleteId;
+  if (toDelete.textContent === 'x') {
+    deleteId = toDelete.id;
+    console.log(deleteId);
+    cart.removeItem(deleteId);
+  }
+  cart.saveToLocalStorage();
+  clearCart();
+  renderCart();
 }
 
 // This will initialize the page and draw the cart on screen
 renderCart();
+
+tableEl.addEventListener('click', removeItemFromCart);
