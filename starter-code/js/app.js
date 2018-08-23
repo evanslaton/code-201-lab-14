@@ -8,10 +8,18 @@ var Cart = function(items) {
 
 Cart.prototype.addItem = function(product, quantity) {
   // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+  var item = {
+    product: product,
+    quantity: quantity,
+  };
+
+  this.items.push(item);
 };
 
 Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
+
+  // localStorage.setItem(Cart.addItem(product, quantity));
 };
 
 Cart.prototype.removeItem = function(item) {
@@ -55,5 +63,49 @@ function generateCatalog() {
   new Product('assets/wine-glass.jpg', 'Wine Glass');
 }
 
-// Initialize the app by creating the big list of products with images and names
+// // Initialize the app by creating the big list of products with images and names
 generateCatalog();
+// // makeQuantityRequired();
+// addProductsToSelectList();
+
+
+// Adds products to the select element in index.html
+// function addProductsToSelectList() {
+//   Product.allProducts.forEach(function(object) {
+//     var optionEl = document.createElement('option');
+//     optionEl.textContent = object.name;
+//     optionEl.setAttribute('value', object.name);
+//     selectEl.appendChild(optionEl);
+//   });
+// }
+
+// Makes sure the user has input a quantity before submitting
+// function makeQuantityRequired() {
+//   var quantityInputEl = document.getElementById('quantity');
+//   quantityInputEl.setAttribute('required', 'required');
+// }
+
+// Gets the quantity number that the user input
+// function getQuantity() {
+//   var quantity = document.getElementById('quantity');
+//   return quantity.value;
+// }
+
+// // Gets the object of the selected element the user selected
+// function getObjectOfSelectedProduct() {
+//   event.preventDefault();
+
+//   var selectValue = selectEl.value;
+
+//   Product.allProducts.forEach(function(object) {
+//     if (object.name === selectValue) {
+//       Cart.addItem(object, getQuantity());
+//     }
+//   });
+
+// }
+
+// var formEl = document.getElementById('catalog');
+// formEl.addEventListener('submit', function(event) {
+//   getObjectOfSelectedProduct(event);
+// });
