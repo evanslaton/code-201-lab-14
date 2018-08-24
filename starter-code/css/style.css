@@ -66,6 +66,10 @@ th, td {
   border: 1px solid black;
 }
 
+td:first-child:hover {
+  cursor: pointer;
+}
+
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }

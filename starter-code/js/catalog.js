@@ -39,6 +39,7 @@ function addToCartConfirmation() {
   divEl.className = 'confirm';
   pEl.textContent = 'Added to cart';
   anchorEl.setAttribute('href', 'cart.html');
+  anchorEl.textContent = 'View cart';
 
   bodyEl[0].appendChild(divEl);
   divEl.appendChild(pEl);
@@ -86,9 +87,8 @@ function updateCounter() {
       }
     }
   }
-  
 
-  itemCount.textContent = itemsInCart;
+  itemCount.textContent = `(${itemsInCart})`;
 }
 
 // As you add items into the cart, show them (item & quantity) in the cart preview div
@@ -110,6 +110,12 @@ function updateCartPreview() {
   cartContentsDiv.appendChild(quantityPEl);
 }
 
+// Makes sure the user has input a quantity before submitting
+function makeQuantityRequired() {
+  var quantityInputEl = document.getElementById('quantity');
+  quantityInputEl.setAttribute('required', 'required');
+}
+
 // Set up the "submit" event listener on the form.
 // This is the trigger for the app. When a user "submits" the form, it will
 // Call that handleSubmit method above and kick off the whole process
@@ -120,3 +126,4 @@ catalogForm.addEventListener('submit', handleSubmit);
 // drop down list in the form.
 populateForm();
 updateCounter();
+makeQuantityRequired();
