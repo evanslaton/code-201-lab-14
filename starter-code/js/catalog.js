@@ -27,7 +27,28 @@ function handleSubmit(event) {
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
+  addToCartConfirmation();
 }
+
+function addToCartConfirmation() {
+  var bodyEl = document.getElementsByTagName('body');
+  var divEl = document.createElement('div');
+  var pEl = document.createElement('p');
+  var anchorEl = document.createElement('a');
+
+  divEl.className = 'confirm';
+  pEl.textContent = 'Added to cart';
+  anchorEl.setAttribute('href', 'cart.html');
+
+  bodyEl[0].appendChild(divEl);
+  divEl.appendChild(pEl);
+  divEl.appendChild(anchorEl);
+
+  setTimeout(function() {
+    bodyEl[0].removeChild(bodyEl[0].lastChild);
+  }, 1900);
+}
+
 
 // Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
@@ -54,8 +75,17 @@ function addSelectedItemToCart() {
 
 // Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
+  var cart = JSON.parse(localStorage.getItem('cart'));
   var itemCount = document.getElementById('itemCount');
-  itemCount.textContent = JSON.parse(localStorage.getItem('cart')).length;
+  var itemsInCart = 0;
+
+  if (cart.length > 0) {
+    for (var i = 0; i < cart.length; i++) {
+      itemsInCart += cart[i][1];
+    }
+  }
+
+  itemCount.textContent = itemsInCart;
 }
 
 // As you add items into the cart, show them (item & quantity) in the cart preview div
@@ -86,3 +116,4 @@ catalogForm.addEventListener('submit', handleSubmit);
 // Before anything else of value can happen, we need to fill in the select
 // drop down list in the form.
 populateForm();
+updateCounter();

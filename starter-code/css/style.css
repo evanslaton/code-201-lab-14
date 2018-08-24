@@ -1,4 +1,7 @@
-/* TODO: Make it awesome */
+body {
+  position: relative;
+}
+
 table {
   border-collapse: collapse;
   border: 1px solid black;
@@ -14,3 +17,26 @@ td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+div.confirm {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  background-color: white;
+  animation-name: fadeOut;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+
+div.confirm > p {
+  font-size: 5em;
+}
+
+
+
+@keyframes fadeOut {
+  0% {opacity: 0;}
+  50% {opacity: 1;}
+  100% {opacity: 0;} 
+} 
