@@ -1,5 +1,7 @@
 'use strict';
 
+var userArrive = true;
+
 // Cart constructor.
 var Cart = function(items) {
   // this.items is an array of CartItem instances.
@@ -15,10 +17,21 @@ Cart.prototype.addItem = function(product, quantity) {
 
 Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
+  if (localStorage.getItem('cart') && userArrive) {
+    var inStorage = JSON.parse(localStorage.getItem('cart'));
+    userArrive = false;
+    if (inStorage.length > 0) {
+      for (var i = inStorage.length - 1; i >= 0; i--) {
+        this.items.unshift(inStorage[i]);
+      }
+    }
+  }
+
   localStorage.setItem('cart', JSON.stringify(this.items));
 };
 
 Cart.prototype.removeItem = function(item) {
+  userArrive = false;
   this.items.splice(item, 1);
 };
 

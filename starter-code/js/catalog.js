@@ -75,15 +75,18 @@ function addSelectedItemToCart() {
 
 // Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
-  var cart = JSON.parse(localStorage.getItem('cart'));
   var itemCount = document.getElementById('itemCount');
   var itemsInCart = 0;
 
-  if (cart.length > 0) {
-    for (var i = 0; i < cart.length; i++) {
-      itemsInCart += cart[i][1];
+  if (localStorage.getItem('cart')) {
+    var cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart.length > 0) {
+      for (var i = 0; i < cart.length; i++) {
+        itemsInCart += cart[i][1];
+      }
     }
   }
+  
 
   itemCount.textContent = itemsInCart;
 }
